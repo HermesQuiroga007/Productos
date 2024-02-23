@@ -1,0 +1,108 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container" ng-app="AppProductos" ng-controller="ctrProductos">
+
+    <h2>Productos</h2>
+
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        <i class="fas fa-plus"></i>  Agregar
+    </button>
+
+    <br />
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content" style="border-radius:10px;">
+                <div class="modal-header border-0">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel" style="width: -moz-available; text-align:center; padding-bottom:-10px;">Nuevo registro</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-xs-14">
+                            <form>
+                                <div class="row text-center">
+                                    <div class="col-6">
+                                        <div class="mb-3">
+                                            <label for="nombre" class="form-label">Nombre</label>
+                                            <input type="text" class="form-control" id="txtNombre">
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="mb-3">
+
+                                            <div class="mb-3">
+                                                <label for="nombre" class="form-label">Proveedor</label>
+                                                <input type="text" class="form-control" id="txtNombre">
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row" style="justify-content:center;text-align:center;">
+                                    <div class="col-6">
+                                        <label for="pwd" class="form-label">Tipo Producto</label>
+                                        <select class="form-select" id="cbxTipo">
+                                            <option ng-repeat="tipo in TipoProducto track by $index" value="{{tipo.Id}}">{{tipo.Descripcion}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer border-0" style="justify-content:center;">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-primary">Guardar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br />
+
+    <div class="panel panel-default">
+        <div class="panel-body"></div>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">TipoProductoId</th>
+                    <th scope="col">Proveedor</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr  ng-repeat="producto in productos track by $index">
+
+                    <td>{{producto.Id}}</td>
+                    <td>{{producto.Nombre}}</td>
+                    <td>{{producto.TipoProductoId}}</td>
+                    <td>{{producto.Proveedor}}</td>
+                    <td>
+                        <button type="button" class="btn btn-outline-info btn-sm" ng-show="!Edit" ng-click="Edit=!Edit">Editar</button>
+                        <button type="button" class="btn btn-outline-success btn-sm" ng-show="Edit" ng-click="Edit=!Edit">Guardar</button>
+                        <button type="button" class="btn btn-outline-danger btn-sm" ng-show="Edit" ng-click="Edit=!Edit">Eliminar</button>
+
+                    </td>
+                </tr>
+              
+            </tbody>
+        </table>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js"></script>
+</div>
+
+@section scripts{
+    <script src="~/ControllerJs/ProductosApp.js"></script>
+    <script src="~/ControllerJs/productosServices.js"></script>
+    <script src="~/ControllerJs/productosController.js"></script>
+}

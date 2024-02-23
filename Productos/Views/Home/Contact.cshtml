@@ -1,0 +1,44 @@
+﻿@{
+    ViewBag.Title = "Contact";
+}
+<main aria-labelledby="title">
+    <h2 id="title">@ViewBag.Title.</h2>
+    <h3>@ViewBag.Message</h3>
+
+
+   <table class="table table-responsive">
+       <thead>
+           <tr>
+               <th>Id</th>
+               <th>Nombre</th>
+               <th>TipoProductoId</th>
+               <th>Proveedor</th>
+           </tr>
+       </thead>
+       <tbody>
+           @foreach (var prod in ViewBag.Productos)
+           {
+           <tr>
+               <td>@prod.Id</td>
+               <td>@prod.Nombre</td>
+               <td>@prod.TipoProductoId</td>
+               <td>@prod.Proveedor</td>
+           </tr>
+           }
+       </tbody>
+
+</table>
+
+
+    <address>
+        One Microsoft Way<br />
+        Redmond, WA 98052-6399<br />
+        <abbr title="Phone">P:</abbr>
+        425.555.0100
+    </address>
+
+    <address>
+        <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
+        <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
+    </address>
+</main>
