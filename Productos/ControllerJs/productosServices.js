@@ -4,7 +4,7 @@
             GetProductos: function () {
                 var result = null;
 
-                $.ajax({
+                $.ajax({ //Llamada AJAX para obtener los datos de los productos de la base de datos SQL Server
                     type: "GET",
                     url: "/Productos/GetProductos/",
                     contentType: "application/json;charset=utf-8",
