@@ -54,9 +54,9 @@
                                 <div class="row" style="justify-content:center;text-align:center;">
                                     <div class="col-6">
                                         <label for="pwd" class="form-label">Tipo Producto</label>
-                                        <select class="form-select" id="cbxTipo" ng-model="newProducto.TipoProductoId">
+                                        <select class="form-select" id="cbxTipo" ng-model="newProducto.TipoProductoDes">
                                             <option value="" disabled selected>Selecciona una opción</option>
-                                            <option ng-repeat="tipo in TipoProducto track by $index" value="{{tipo.Id}}">{{tipo.Descripcion}}</option>
+                                            <option ng-repeat="tipo in TipoProducto track by $index" value="{{tipo.Descripcion}}">{{tipo.Descripcion}}</option>
                                         </select>
                                     </div>
                                 </div>
@@ -82,7 +82,7 @@
                 <tr>
                     <th scope="col">Id</th>
                     <th scope="col">Nombre</th>
-                    <th scope="col">TipoProductoId</th>
+                    <th scope="col">TipoProducto</th>
                     <th scope="col">Proveedor</th>
                     <th>Acciones</th>
                 </tr>
@@ -106,11 +106,11 @@
 
                     <td>
                         <span ng-show="!Edit">
-                            {{producto.TipoProductoId}}
+                            {{producto.TipoProductoDes}}
                         </span>
-                        <select class="form-select" id="cbxTipo" ng-model="producto.TipoProductoId" ng-show="Edit" required>
+                        <select class="form-select" id="cbxTipo" ng-model="producto.TipoProductoDes" ng-show="Edit" required>
                             <option value="" disabled selected>Selecciona una opción</option>
-                            <option ng-repeat="tipo in TipoProducto" value="{{ tipo.Id }}">{{ tipo.Descripcion }}</option>
+                            <option ng-repeat="tipo in TipoProducto" value="{{ tipo.Descripcion }}">{{ tipo.Descripcion }}</option>
                         </select>
                     </td>
 

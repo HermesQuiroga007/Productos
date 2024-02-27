@@ -16,7 +16,7 @@ namespace ProductosDB
         {
             List<Productos> Lista = new List<Productos>();
 
-            Lista = _CtxProductos.Query<Productos>("SELECT Id, Nombre, TipoProductoId, Proveedor, CreadoEl, CreadoPor, ModificadoEn, ModificadoPor FROM Productos").ToList();
+            Lista = _CtxProductos.Query<Productos>("SELECT Id, Nombre, TipoProductoDes, Proveedor, CreadoEl, CreadoPor, ModificadoEn, ModificadoPor FROM Productos").ToList();
 
             return Lista;
         }
@@ -34,8 +34,8 @@ namespace ProductosDB
 
             try
             {
-                var sql = @"INSERT INTO Productos (Nombre, TipoProductoId, Proveedor, CreadoEl, CreadoPor, ModificadoEn, ModificadoPor) 
-                            VALUES (@Nombre, @TipoProductoId, @Proveedor, GETDATE(), @CreadoPor, GETDATE(), @ModificadoPor);
+                var sql = @"INSERT INTO Productos (Nombre, TipoProductoDes, Proveedor, CreadoEl, CreadoPor, ModificadoEn, ModificadoPor) 
+                            VALUES (@Nombre, @TipoProductoDes, @Proveedor, GETDATE(), @CreadoPor, GETDATE(), @ModificadoPor);
                             SELECT CAST(SCOPE_IDENTITY() as int)";
 
                 result.Id = _CtxProductos.Query<int>(sql, producto).Single();
@@ -59,7 +59,7 @@ namespace ProductosDB
             {
                 var sql = @"UPDATE Productos SET 
                             Nombre = @Nombre, 
-                            TipoProductoId = @TipoProductoId, 
+                            TipoProductoDes = @TipoProductoDes, 
                             Proveedor = @Proveedor, 
                             ModificadoEn = GETDATE(), 
                             ModificadoPor = @ModificadoPor 
@@ -68,7 +68,7 @@ namespace ProductosDB
                 _CtxProductos.Execute(sql, new
                 {
                     Nombre = producto.Nombre,
-                    TipoProductoId = producto.TipoProductoId,
+                    TipoProductoDes = producto.TipoProductoDes,
                     Proveedor = producto.Proveedor,
                     ModificadoPor = producto.ModificadoPor,
                     Id = producto.Id
