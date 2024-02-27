@@ -1,7 +1,17 @@
 ﻿productosController.controller('ctrProductos', [
     '$scope',
     'productoService',
-    function($scope, productoService) {
+    function ($scope, productoService) {
+        $scope.newProducto = {};
+        $scope.productos = [];
+        $scope.TipoProducto = [];
+
+        // Cargar productos y tipo de productos al inicio
+        cargarProductos();
+        cargarTipoProducto();
+
+        // Función para cargar productos
+        function cargarProductos() {
         $scope.productos = productoService.GetProductos();
         $scope.TipoProducto = productoService.GetTipoProducto();
         $scope.Edit = false;
