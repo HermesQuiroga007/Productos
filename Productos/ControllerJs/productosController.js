@@ -12,11 +12,73 @@
 
         // Función para cargar productos
         function cargarProductos() {
-        $scope.productos = productoService.GetProductos();
-        $scope.TipoProducto = productoService.GetTipoProducto();
-        $scope.Edit = false;
-    }
-]);    
+            productoService.GetProductos()
+                .then(function (data) {
+                    $scope.productos = data;
+                })
+                .catch(function (error) {
+                    console.error('Error al cargar productos:', error);
+                });
+        }
 
-//Scope lo usamos para mostrar los datos en la vista HTML y las 
-//funciones de las llamadas AJAX para obtener los datos de la base de datos SQL Server 
+        // Función para cargar tipo de productos
+        function cargarTipoProducto() {
+            productoService.GetTipoProducto()
+                .then(function (data) {
+                    $scope.TipoProducto = data;
+                })
+                .catch(function (error) {
+                    console.error('Error al cargar tipos de productos:', error);
+                });
+        }
+
+        $scope.GuardarProducto = function () {
+            productoService.InsertProducto($scope.newProducto)
+                .then(function (result) {
+                    if (result.Exitoso) {
+                        alertify.success(result.Mensaje);
+                        cargarProductos(); // Actualizar lista de productos después de la inserción
+                    } else {
+                        alertify.error(result.Mensaje);
+                    }
+                })
+                .catch(function (error) {
+                    console.error('Error al guardar producto:', error);
+                    alertify.error('Error al guardar producto');
+                });
+        }
+
+        $scope.ActualizarProducto = function (index) {
+            var updateProducto = $scope.productos[index];
+            productoService.ActualizarProducto(updateProducto)
+                .then(function (result) {
+                    if (result.Exitoso) {
+                        alertify.success(result.Mensaje);
+                        cargarProductos(); // Actualizar lista de productos después de la actualización
+                    } else {
+                        alertify.error(result.Mensaje);
+                    }
+                })
+                .catch(function (error) {
+                    console.error('Error al actualizar producto:', error);
+                    alertify.error('Error al actualizar producto');
+                });
+        }
+
+        $scope.EliminarProducto = function (id) {
+            productoService.EliminarProducto(id)
+                .then(function (result) {
+                    if (result.Exitoso) {
+                        alertify.success(result.Mensaje);
+                        cargarProductos(); // Actualizar lista de productos después de la eliminación
+                    } else {
+                        alertify.error(result.Mensaje);
+                    }
+                })
+                .catch(function (error) {
+                    console.error('Error al eliminar producto:', error);
+                    alertify.error('Error al eliminar producto');
+                });
+        }
+    }
+]);

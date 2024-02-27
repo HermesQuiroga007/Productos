@@ -6,6 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - Mi aplicación ASP.NET</title>
     @Styles.Render("~/Content/css")
+
+    <link href="~/Scripts/plugins/alertifyjs/themes/alertify.default.css" rel="stylesheet" />
+    <link href="~/Scripts/plugins/alertifyjs/themes/alertify.core.css" rel="stylesheet" />
+
     @Scripts.Render("~/bundles/modernizr")
 
     <!-- jQuery -->
@@ -16,7 +20,6 @@
 
     <!-- Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-
 
 </head>
 <body>
@@ -48,6 +51,7 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     <script src="~/Scripts/angular.min.js"></script>
+    <script src="~/Scripts/plugins/alertifyjs/lib/alertify.js"></script>
     @RenderSection("scripts", required: false)
 </body>
 </html>

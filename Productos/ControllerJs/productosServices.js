@@ -1,73 +1,58 @@
-﻿productosServices.factory('productoService', [
-    function () {
-        return {
-            GetProductos: function () {
-                var result = null;
-
-                $.ajax({ //Llamada AJAX para obtener los datos de los productos de la base de datos SQL Server
-                    type: "GET",
-                    url: "/Productos/GetProductos/",
-                    contentType: "application/json;charset=utf-8",
-                    data: "{}",
-                    async: false,
-                    dataType: "json",
-
-                    success: function (data) {
-                        result = data;
-                    },
-                    error: function (errordata) {
-                        alert(errordata.responseText);
-                    }
+﻿productosServices.factory('productoService', ['$http', function ($http) {
+    return {
+        GetProductos: function () {
+            return $http.get("/Productos/GetProductos/")
+                .then(function (response) {
+                    return response.data;
+                })
+                .catch(function (error) {
+                    console.error('Error al obtener productos:', error);
+                    throw error;
                 });
+        },
 
-                return result;
-            },
-
-            GetTipoProducto: function () {
-                var result = null;
-
-                $.ajax({
-                    type: "GET",
-                    url: "/Productos/GetTipoProducto/",
-                    contentType: "application/json;charset=utf-8",
-                    data: "{}",
-                    async: false,
-                    dataType: "json",
-
-                    success: function (data) {
-                        result = data;
-                    },
-                    error: function (errordata) {
-                        alert(errordata.responseText);
-                    }
+        GetTipoProducto: function () {
+            return $http.get("/Productos/GetTipoProducto/")
+                .then(function (response) {
+                    return response.data;
+                })
+                .catch(function (error) {
+                    console.error('Error al obtener tipo de productos:', error);
+                    throw error;
                 });
+        },
 
-                return result;
-            },
-
-            InsertProducto: function () {
-                var result = null;
-
-                $.ajax({
-                    type: "GET",
-                    url: "/Productos/GetProductos/",
-                    contentType: "application/json;charset=utf-8",
-                    data: JSON.stringify({
-                        producto: producto
-                    }),
-
-                    async: false,
-                    dataType: "json",
-                    success: function (data) {
-                        result = data;
-                    },
-                    error: function (errordata) {
-                        alert(errordata.responseText);
-                    }
+        InsertProducto: function (producto) {
+            return $http.post("/Productos/InsertProducto/", { producto: producto })
+                .then(function (response) {
+                    return response.data;
+                })
+                .catch(function (error) {
+                    console.error('Error al insertar producto:', error);
+                    throw error;
                 });
+        },
 
-                return result;
-            },
+        ActualizarProducto: function (producto) {
+            return $http.post("/Productos/ActualizarProducto/", producto)
+                .then(function (response) {
+                    return response.data;
+                })
+                .catch(function (error) {
+                    console.error('Error al actualizar producto:', error);
+                    throw error;
+                });
+        },
+
+        EliminarProducto: function (id) {
+            return $http.post("/Productos/EliminarProducto/", { id: id })
+                .then(function (response) {
+                    return response.data;
+                })
+                .catch(function (error) {
+                    console.error('Error al eliminar producto:', error);
+                    throw error;
+                });
         }
-    }
-]);
+    };
+}]);

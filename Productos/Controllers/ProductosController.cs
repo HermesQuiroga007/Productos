@@ -10,6 +10,7 @@ namespace Productos.Controllers
 {
     public class ProductosController : Controller
     {
+        ProductosDB.Repositorio repo = new ProductosDB.Repositorio();
         // GET: Productos
         public ActionResult Index()
         {
@@ -33,9 +34,41 @@ namespace Productos.Controllers
 
         public ActionResult InsertProducto(ProductosDB.Entities.Productos producto)
         {
+
+
             Repositorio repo = new Repositorio();
+            producto.CreadoPor = "Admin";
+            //producto.ModificadoPor = "Admin";
             Respuesta result = repo.InsertProducto(producto);
             return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult ActualizarProducto(ProductosDB.Entities.Productos producto)
+        {
+            try
+            {
+                producto.ModificadoPor = "Admin";
+                Respuesta result = repo.ActualizarProducto(producto);
+                return Json(result, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(new Respuesta { Exitoso = false, Mensaje = "Error al actualizar el producto: " + ex.Message }, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+
+        public ActionResult EliminarProducto(int id)
+        {
+            try
+            {
+                Respuesta result = repo.EliminarProducto(id);
+                return Json(result, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(new Respuesta { Exitoso = false, Mensaje = "Error al eliminar el producto: " + ex.Message }, JsonRequestBehavior.AllowGet);
+            }
         }
     }
 }

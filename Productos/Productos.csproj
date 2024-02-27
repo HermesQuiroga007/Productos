@@ -998,6 +998,9 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\plugins\alertifyjs\lib\alertify.js" />
+    <Content Include="Scripts\plugins\alertifyjs\themes\alertify.core.css" />
+    <Content Include="Scripts\plugins\alertifyjs\themes\alertify.default.css" />
     <Content Include="Scripts\sitemap.xml" />
     <Content Include="Scripts\test-bundles\angular-aria.js" />
     <Content Include="Scripts\test-bundles\angular-cookies.js" />
